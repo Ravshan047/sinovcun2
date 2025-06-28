@@ -27,6 +27,15 @@ REST_FRAMEWORK = {
 #     "TOKEN_BLACKLIST_ENABLED": True,
 # }
 
+
+# Security sozlamalari
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'vobinfo-backend.onrender.com']
+
+
+
 # Ilovalar ro‘yxati
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,7 +73,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://vobinfo-frontend.vercel.app',
+    'https://vobsinov-ravshans-projects-2745c1c6.vercel.app',
     'http://localhost:5173'  
 ]
 
@@ -127,9 +136,26 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3',
-        conn_max_age=600
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
     )
 }
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'vobinfo-backend.onrender.com']
+
+
+
+
+CORS_ALLOWED_ORIGINS = [
+    'https://vobinfo-frontend.vercel.app',
+    'http://localhost:5173'
+]
+
+
+
+
 
 # Birlamchi kalitlar uchun standart
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
