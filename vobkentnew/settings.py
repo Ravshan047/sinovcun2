@@ -30,8 +30,8 @@ REST_FRAMEWORK = {
 
 # Security sozlamalari
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 ALLOWED_HOSTS = ['https://lutsifer.pythonanywhere.com', ".pythonanywhere.com", '*']
 
 
@@ -72,10 +72,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',  # bu ham kerak bo'ladi
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'https://vobsinov-ravshans-projects-2745c1c6.vercel.app',
-    'http://localhost:5173'  
-]
 
 
 ROOT_URLCONF = 'vobkentnew.urls'
@@ -133,17 +129,8 @@ import dj_database_url
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True
-    )
-}
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'vobinfo-backend.onrender.com']
 
 
 
