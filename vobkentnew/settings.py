@@ -32,7 +32,7 @@ REST_FRAMEWORK = {
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://lutsifer.pythonanywhere.com', ".pythonanywhere.com", '*']
 
 
 
