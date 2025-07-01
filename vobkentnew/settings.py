@@ -19,6 +19,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # # JWT sozlamalari
@@ -55,7 +56,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
 
     # Swagger uchun
-    'drf_yasg',
+    'drf_spectacular',
 
     'corsheaders',
 ]
@@ -133,12 +134,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
-
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 CORS_ALLOWED_ORIGINS = [
     'https://vobinfo-frontend.vercel.app',
     'http://localhost:5173',
-    "https://vobsinov.vercel.app/"
+    "https://vobsinov.vercel.app"
 ]
 
 
