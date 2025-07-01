@@ -32,7 +32,7 @@ REST_FRAMEWORK = {
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'vobinfo-backend.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 
 
@@ -150,7 +150,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'vobinfo-backend.onrender.com']
 
 CORS_ALLOWED_ORIGINS = [
     'https://vobinfo-frontend.vercel.app',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    "https://vobsinov.vercel.app/"
 ]
 
 
