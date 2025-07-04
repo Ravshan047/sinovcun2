@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+# news/views.py
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -54,26 +55,17 @@ class WaterSupplyViewSet(viewsets.ModelViewSet):
     serializer_class = WaterSupplySerializer
     permission_classes = [AllowAny]
 
-
-from rest_framework import generics
-from rest_framework.permissions import AllowAny
-from .models import GasSupply
-from .serializers import GasSupplySerializer
-
 # 📍 Gas Supply List View
 class GasSupplyListCreateView(generics.ListCreateAPIView):
     queryset = GasSupply.objects.all().order_by('-created_at')
     serializer_class = GasSupplySerializer
     permission_classes = [AllowAny]
 
-
 # 📍 Gas Supply Detail View (Retrieve, Update, Delete)
 class GasSupplyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = GasSupply.objects.all()
     serializer_class = GasSupplySerializer
     permission_classes = [AllowAny]
-
-
 
 # 📍 Education View
 class EducationViewSet(viewsets.ModelViewSet):
@@ -86,7 +78,6 @@ class HealthcareViewSet(viewsets.ModelViewSet):
     queryset = Healthcare.objects.all().order_by('-created_at')
     serializer_class = HealthcareSerializer
     permission_classes = [AllowAny]
-
 
 # 📍 News View
 class NewsViewSet(viewsets.ModelViewSet):
@@ -111,10 +102,18 @@ class NewsListAPIView(ListAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = [AllowAny]
+    authentication_classes = []  # Autentifikatsiyani o'chirish
 
 # 📍 Department View
 class DepartmentViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
     permission_classes = [AllowAny]
-    lookup_field = 'slug'   
+    lookup_field = 'slug'
+
+# 📍 News Detail View (Yangilikni ID bo'yicha olish)
+class NewsDetailAPIView(generics.RetrieveAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'

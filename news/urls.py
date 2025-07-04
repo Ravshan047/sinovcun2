@@ -1,3 +1,4 @@
+# news/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework import permissions
@@ -8,7 +9,8 @@ from .views import (
     MahallaViewSet, VillageViewSet, ElectricSupplyViewSet,
     WaterSupplyViewSet, EducationViewSet, HealthcareViewSet,
     PoliceNoticeViewSet, NewsViewSet, ContactViewSet,
-    NewsListAPIView, DepartmentViewSet, GasSupplyListCreateView, GasSupplyDetailView
+    NewsListAPIView, DepartmentViewSet, GasSupplyListCreateView, GasSupplyDetailView,
+    NewsDetailAPIView  # Yangi view qo‘shish
 )
 
 # 🔧 Router setup
@@ -24,15 +26,7 @@ router.register(r'departments/news', NewsViewSet)
 router.register(r'departments/contact', ContactViewSet)
 router.register(r'departments', DepartmentViewSet)
 
-
-# ✅ To‘g‘ri gaz API
-# router.register(r'departments/gastest', GasSupplyViewSet)
-
-# ❌ Bu qismni olib tashladik:
-# router.register(r'departments/gas', GasSupplyViewSet)
-
-
-#  Swagger
+# Swagger
 schema_view = get_schema_view(
     openapi.Info(
         title="News and Services API",
@@ -45,9 +39,10 @@ schema_view = get_schema_view(
 
 # 🔗 URL patterns
 urlpatterns = [
-    path('departments/gas', GasSupplyListCreateView.as_view()),
-    path('departments/gas/<int:pk>', GasSupplyDetailView.as_view()),
-    path('', include(router.urls)),
-    path('list/', NewsListAPIView.as_view(), name='news-list'),
+    path('', include(router.urls)),  # Router uchun asosiy yo‘l
+    path('list/', NewsListAPIView.as_view(), name='news-list'),  # News list uchun
+    path('departments/gas/', GasSupplyListCreateView.as_view()),
+    path('departments/gas/<int:pk>/', GasSupplyDetailView.as_view()),
+    path('departments/news/<int:pk>/', NewsDetailAPIView.as_view(), name='news-detail'),  # Yangi detal yo‘li
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
